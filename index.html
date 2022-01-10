@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <title>Navigation Normaliza</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    header.navigation-normaliza-2022 {
+      box-shadow: 1px 1px 10px #bababa;
+    }
+
+    .navigation-normaliza {
+      width: 100%;
+      height: auto;
+    }
+
+    .navigation-normaliza .navigation-normaliza__wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 1rem;
+    }
+
+    .navigation-normaliza .navigation-normaliza__logo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .navigation-normaliza .navigation-normaliza__icon-sidebar {
+      position: relative;
+      display: inline-block;
+      width: 30px;
+      height: calc(30px - 3px);
+      cursor: pointer;
+    }
+
+    .navigation-normaliza .navigation-normaliza__icon-sidebar span {
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: 4px;
+      background-color: rgb(136, 136, 136);
+    }
+
+    .navigation-normaliza .navigation-normaliza__icon-sidebar span:nth-child(2) {
+      top: 10px;
+    }
+
+    .navigation-normaliza .navigation-normaliza__icon-sidebar span:nth-child(3) {
+      top: 20px;
+    }
+
+    .navigation-normaliza__image {
+      display: inline-block;
+    }
+
+    .navigation-normaliza__image img {
+      display: inline-block;
+      width: 100%;
+      max-width: 90px;
+    }
+
+    .navigation-normaliza .navigation-normaliza__items {
+      display: none;
+    }
+
+    .navigation-normaliza .navigation-normaliza__buttons {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      list-style: none;
+      padding: 1.5rem 0 0;
+    }
+
+    .navigation-normaliza .navigation-normaliza__buttons button {
+      border: none;
+      width: 100%;
+      max-width: 230px;
+      height: 42px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      color: #fff;
+      padding: 0 12px;
+      transition: .15s all ease-in-out;
+    }
+
+    .navigation-normaliza .navigation-normaliza__buttons .navigation-normaliza__button-pago,
+    .navigation-normaliza .navigation-normaliza__buttons .navigation-normaliza__button-agendar {
+      width: 48%;
+    }
+
+    .navigation-normaliza .navigation-normaliza__buttons .navigation-normaliza__button-pago a,
+    .navigation-normaliza .navigation-normaliza__buttons .navigation-normaliza__button-agendar a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .navigation-normaliza .navigation-normaliza__buttons .navigation-normaliza__button-pago button {
+      background-color: #03A84C;
+      border-bottom: 4px solid #017e39;
+    }
+
+    .navigation-normaliza .navigation-normaliza__buttons .navigation-normaliza__button-agendar button {
+      background-color: #F33D32;
+      border-bottom: 4px solid #a72821;
+    }
+
+    .navigation-normaliza .navigation-normaliza__buttons .navigation-normaliza__button-pago button:hover,
+    .navigation-normaliza .navigation-normaliza__buttons .navigation-normaliza__button-agendar button:hover {
+      opacity: .87;
+    }
+
+    /* MOBILE MENU */
+
+    .navigation-normaliza__icon-sidebar-menu {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background-color: #303030;
+      z-index: 99999;
+      transition: .3s all ease-in-out;
+    }
+
+    .navigation-normaliza__icon-sidebar-menu--active {
+      left: 0;
+    }
+
+    .navigation-normaliza__icon-sidebar-menu ul a.navigation-normaliza__image {
+      padding: 2rem 2rem 0;
+      margin: 0 0 2rem;
+    }
+
+    .navigation-normaliza__icon-sidebar-menu ul {
+      list-style: none;
+      width: 100%;
+      height: auto;
+    }
+
+    .navigation-normaliza__icon-sidebar-menu ul li {
+      transition: .15s background-color ease-in-out;
+    }
+
+    .navigation-normaliza__icon-sidebar-menu ul li:hover {
+      background-color: #4d4d4d;
+    }
+
+    .navigation-normaliza__icon-sidebar-menu ul li:nth-child(2) {
+      border-left: 5px solid #d4bd08;
+    }
+
+    .navigation-normaliza__icon-sidebar-menu ul li:nth-child(3) {
+      border-left: 5px solid #028702;
+    }
+
+    .navigation-normaliza__icon-sidebar-menu ul li:nth-child(4) {
+      border-left: 5px solid #004ddd;
+    }
+
+    .navigation-normaliza__icon-sidebar-menu ul li:nth-child(5) {
+      border-left: 5px solid #ca2929;
+    }
+
+    .navigation-normaliza__icon-sidebar-menu ul li a {
+      display: block;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 400;
+      line-height: 1;
+      font-size: 15px;
+      text-decoration: none;
+      color: rgb(206, 206, 206);
+      padding: 1rem 1.5rem;
+    }
+
+    .navigation-normaliza__close {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      width: 100%;
+      padding: 0 1.5rem 0 0;
+      margin: 2rem 0 0;
+    }
+
+    .navigation-normaliza__close button {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 600;
+      line-height: 1;
+      font-size: 1rem;
+      color: #fff;
+      padding: .5rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* END MOBILE MENU */
+
+    /* BUTTONS MOBILE MENU */
+
+    .navigation-normaliza__buttons-menu {
+      width: 100%;
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      z-index: 99999;
+      transition: .4s all ease-in-out;
+      box-shadow: 1px 1px 10px #bababa;
+    }
+
+    .navigation-normaliza__buttons-menu--active {
+      top: 0;
+    }
+
+    .navigation-normaliza__buttons-menu__close {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 100%;
+      height: auto;
+      padding: 2rem 1rem 1rem;
+    }
+
+    .navigation-normaliza__buttons-menu__close .navigation-normaliza__buttons-menu__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .navigation-normaliza__buttons-menu__close .navigation-normaliza__buttons-menu__icon span {
+      display: inline-block;
+      width: 3px;
+      height: 28px;
+      background-color: #7b7b7b;
+    }
+
+    .navigation-normaliza__buttons-menu__close .navigation-normaliza__buttons-menu__icon span:first-child {
+      position: relative;
+      top: 0;
+      left: 1px;
+      transform: rotate(46deg);
+    }
+
+    .navigation-normaliza__buttons-menu__close .navigation-normaliza__buttons-menu__icon span:last-child {
+      transform: rotate(-43deg);
+    }
+
+    .navigation-normaliza__buttons-menu .navigation-normaliza__buttons-menu__items {
+      padding: 1rem 1rem 0;
+    }
+
+    .navigation-normaliza__buttons-menu__items h3 {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 700;
+      line-height: 1.25;
+      font-size: 1.1rem;
+      color: #027CC5;
+      text-align: center;
+    }
+
+    .navigation-normaliza__buttons-menu .navigation-normaliza__buttons-menu__items ul {
+      width: 100%;
+      height: auto;
+      list-style: none;
+      padding: 2.5rem 0 0;
+    }
+
+    .navigation-normaliza__buttons-menu .navigation-normaliza__buttons-menu__items ul li {
+      max-width: 240px;
+      margin: 0 auto 1.5rem;
+      border-radius: 5px;
+    }
+
+    .navigation-normaliza__buttons-menu .navigation-normaliza__buttons-menu__items ul li:hover {
+      opacity: .9;
+    }
+
+    .navigation-normaliza__buttons-menu .navigation-normaliza__buttons-menu__items ul li:first-child {
+      background-color: #04A94B;
+      border-bottom: 4px solid #006a2e;
+    }
+
+    .navigation-normaliza__buttons-menu .navigation-normaliza__buttons-menu__items ul li:nth-child(2) {
+      background-color: #F33D32;
+      border-bottom: 4px solid #a52a24;
+    }
+
+    .navigation-normaliza__buttons-menu .navigation-normaliza__buttons-menu__items ul li:nth-child(3) {
+      background-color: #027CC5;
+      border-bottom: 4px solid #004c77;
+    }
+
+    .navigation-normaliza__buttons-menu .navigation-normaliza__buttons-menu__items ul li:last-child {
+      background-color: #FFD800;
+      border-bottom: 4px solid #a78e02;
+    }
+
+    .navigation-normaliza__buttons-menu .navigation-normaliza__buttons-menu__items ul a {
+      width: 100%;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      line-height: 1.25;
+      color: #ffffff;
+      text-align: center;
+      display: block;
+      padding: 1rem;
+      text-decoration: none;
+    }
+
+    /* END BUTTONS MOBILE MENU */
+
+    /* MEDIA QUERIES */
+
+    @media (min-width: 1024px) {
+      header.navigation-normaliza-2022 {
+        position: relative;
+      }
+
+      .navigation-normaliza {
+        max-width: 1020px;
+        min-height: 80px;
+        margin: auto;
+      }
+
+      .navigation-normaliza .navigation-normaliza__icon-sidebar {
+        display: none;
+      }
+
+      .navigation-normaliza .navigation-normaliza__wrapper {
+        flex-direction: row;
+        padding: 1rem 2rem;
+      }
+
+      .navigation-normaliza .navigation-normaliza__logo {
+        width: auto;
+      }
+
+      .navigation-normaliza__image img {
+        max-width: 150px;
+      }
+
+      .navigation-normaliza .navigation-normaliza__items {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 85%;
+        list-style: none;
+      }
+
+      .navigation-normaliza .navigation-normaliza__items li {
+        margin: 0 8px 0;
+      }
+
+      .navigation-normaliza .navigation-normaliza__items li a {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1;
+        color: #4f4f4f;
+        text-decoration: none;
+        padding: 1rem 0;
+      }
+
+      .navigation-normaliza .navigation-normaliza__items li a:hover {
+        border-bottom: 3px solid #006caa;
+      }
+
+      .navigation-normaliza .navigation-normaliza__buttons {
+        width: 55%;
+        padding: 0;
+      }
+
+      .navigation-normaliza__buttons-menu {
+        top: 82px;
+        left: inherit;
+        right: 25%;
+        max-width: 600px;
+        height: 350px;
+        border-bottom: 4px solid #00a900;
+        transition: .3s all ease-in-out;
+        display: none;
+        opacity: 0;
+        z-index: -1;
+      }
+
+      .navigation-normaliza__buttons-menu--active {
+        display: block;
+        opacity: 1;
+        z-index: 99999;
+      }
+
+      .navigation-normaliza__buttons-menu__close {
+        padding: 1rem 1rem 0;
+      }
+
+      .navigation-normaliza__buttons-menu__close .navigation-normaliza__buttons-menu__icon span:last-child {
+        position: relative;
+        top: 0;
+        left: -1px;
+      }
+
+      .navigation-normaliza__buttons-menu .navigation-normaliza__buttons-menu__items {
+        padding: 0 2rem 0;
+      }
+
+      .navigation-normaliza__buttons-menu__items h3 {
+        text-align: left;
+      }
+
+      .navigation-normaliza__buttons-menu .navigation-normaliza__buttons-menu__items ul {
+        padding: 1.5rem 0 0;
+      }
+
+      .navigation-normaliza__buttons-menu .navigation-normaliza__buttons-menu__items ul li {
+        max-width: 190px;
+        margin: 0 0 10px;
+      }
+
+      .navigation-normaliza__buttons-menu .navigation-normaliza__buttons-menu__items ul a {
+        font-size: 15px;
+        padding: .8rem;
+      }
+    }
+
+    @media (min-width: 1240px) {
+      .navigation-normaliza {
+        max-width: 1240px;
+      }
+
+      .navigation-normaliza .navigation-normaliza__items li a {
+        font-size: 15px;
+      }
+
+      .navigation-normaliza .navigation-normaliza__buttons button {
+        font-size: 15px;
+        height: 50px;
+      }
+
+      .navigation-normaliza__buttons-menu {
+        top: 84px;
+        right: 20%;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      .navigation-normaliza {
+        max-width: 1400px;
+      }
+
+      .navigation-normaliza__buttons-menu {
+        right: 25%;
+      }
+    }
+
+    @media (min-width: 1800px) {
+      .navigation-normaliza__buttons-menu {
+        right: 30%;
+      }
+    }
+
+
+    /* END MEDIA QUERIES */
+  </style>
+
+</head>
+
+<body>
+
+  <header class="navigation-normaliza-2022">
+    <nav class="navigation-normaliza">
+      <div class="navigation-normaliza__wrapper">
+
+        <div class="navigation-normaliza__logo">
+          <div class="navigation-normaliza__icon-sidebar">
+            <span></span><span></span><span></span>
+          </div>
+
+          <a href="#" class="navigation-normaliza__image">
+            <img src="src/logo-normaliza.svg" alt="Logo Normaliza">
+          </a>
+        </div>
+
+        <ul class="navigation-normaliza__items">
+          <li>
+            <a href="#">
+              Renegociación
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Atención al Cliente
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Canales de Atención
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Contacto
+            </a>
+          </li>
+        </ul>
+
+        <ul class="navigation-normaliza__buttons">
+          <li class="navigation-normaliza__button-pago">
+            <a>
+              <button>
+                Paga en línea
+              </button>
+            </a>
+          </li>
+
+          <li class="navigation-normaliza__button-agendar">
+            <a href="#">
+              <button>
+                Agendar Pago
+              </button>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="navigation-normaliza__icon-sidebar-menu">
+      <ul>
+        <a href="#" class="navigation-normaliza__image">
+          <img src="src/logo-normaliza.svg" alt="Logo Normaliza">
+        </a>
+
+        <li>
+          <a href="#">
+            Renegociación
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            Atención al Cliente
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            Canales de Atención
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            Contacto
+          </a>
+        </li>
+      </ul>
+
+      <div class="navigation-normaliza__close">
+        <button>
+          Cerrar
+        </button>
+      </div>
+    </div>
+
+    <div class="navigation-normaliza__buttons-menu">
+      <div class="navigation-normaliza__buttons-menu__close">
+        <div class="navigation-normaliza__buttons-menu__icon">
+          <span></span><span></span>
+        </div>
+      </div>
+
+      <div class="navigation-normaliza__buttons-menu__items">
+        <h3>
+          Selecciona la opción que deseas pagar
+        </h3>
+
+        <ul>
+          <li>
+            <a href="#">
+              Pago Online
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Pago Online CAE
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Bci Pagos
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Servipag
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  <script>
+    //Hamburger menu mobile icon
+    var hamburgerIcon = document.querySelector(".navigation-normaliza__icon-sidebar");
+    //Mobile menu navigation
+    var menuNavigation = document.querySelector(".navigation-normaliza__icon-sidebar-menu");
+    //Close button menu
+    var closeButtonMenu = document.querySelector(".navigation-normaliza__close button");
+
+    //Show mobile menu sidebar
+    hamburgerIcon.addEventListener("click", () => {
+      menuNavigation.classList.add("navigation-normaliza__icon-sidebar-menu--active");
+    });
+
+    //Hide mobile menu sidebar
+    closeButtonMenu.addEventListener("click", () => {
+      menuNavigation.classList.remove("navigation-normaliza__icon-sidebar-menu--active");
+    });
+
+
+    //Pay options button
+    var pagaEnLinea = document.querySelector(".navigation-normaliza__button-pago");
+    //Mobile menu pay options
+    var menuPayOptions = document.querySelector(".navigation-normaliza__buttons-menu");
+    //Close button menu pay options
+    var closeButtonMenuPayOptions = document.querySelector(".navigation-normaliza__buttons-menu__icon");
+
+    //Show menu pay options
+    pagaEnLinea.addEventListener("click", () => {
+      menuPayOptions.classList.add("navigation-normaliza__buttons-menu--active");
+    });
+
+    //Hide menu pay options
+    closeButtonMenuPayOptions.addEventListener("click", () => {
+      menuPayOptions.classList.remove("navigation-normaliza__buttons-menu--active");
+    });
+  </script>
+</body>
+
+</html>
